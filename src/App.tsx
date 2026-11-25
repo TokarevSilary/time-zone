@@ -7,7 +7,6 @@ import { v4 as uuidv4 } from 'uuid';
 function App() {
   const [timezoneInput, setTimezoneInput] = useState("0");
   const [city, setCity] = useState<string>("");
-  const [timezone, setTimezone] = useState<number>();
   const [data, setData] = useState<Array<{ id: string; city: string; cityTime: number }>>([]);
 
   const submit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -36,7 +35,6 @@ function App() {
 
     setData([...data, { city, cityTime, id: uuidv4() }]);
     setCity("");
-    setTimezone(0);
     setTimezoneInput("0");
   };
 
@@ -44,14 +42,7 @@ const changeTimezone = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.currentTarget.setCustomValidity("");
 
     const value = e.currentTarget.value;
-
     setTimezoneInput(value);
-
-    if (value === "-" || value === "" || value === ".") return;
-
-    if (isNaN(Number(value))) return;
-
-    setTimezone(Number(value));
 };
 
       const changeCity = (e: React.ChangeEvent<HTMLInputElement>) => {
