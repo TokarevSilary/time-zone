@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 
 function App() {
+  const [timezoneInput, setTimezoneInput] = useState("0");
   const [city, setCity] = useState<string>("");
   const [timezone, setTimezone] = useState<number>();
   const [data, setData] = useState<Array<{ id: string; city: string; cityTime: number }>>([]);
@@ -36,16 +37,22 @@ function App() {
     setData([...data, { city, cityTime, id: uuidv4() }]);
     setCity("");
     setTimezone(0);
+    setTimezoneInput("0");
   };
 
-    const changeTimezone = (e: React.ChangeEvent<HTMLInputElement>) => {
-      e.currentTarget.setCustomValidity("");
-      const validate = /^-(12|1[01]|[0-9])(\.5)?$|^(0|[1-9]|1[0-4])(\.5)?$/;
+const changeTimezone = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.currentTarget.setCustomValidity("");
 
-      const value = e.currentTarget.value;
-      if (!validate.test(value)) return;
-      setTimezone(Number(value));
-  };
+    const value = e.currentTarget.value;
+
+    setTimezoneInput(value);
+
+    if (value === "-" || value === "" || value === ".") return;
+
+    if (isNaN(Number(value))) return;
+
+    setTimezone(Number(value));
+};
 
       const changeCity = (e: React.ChangeEvent<HTMLInputElement>) => {
       e.currentTarget.setCustomValidity("");
@@ -76,7 +83,7 @@ useEffect(() => {
       <h3 className="input-name city-label">Название</h3>
       <h3 className="input-name timezone-label">Временная зона</h3>
       <input value={city} onChange={changeCity} name="city" type="text" className="input-city" placeholder="Введите название города" required />
-      <input value={timezone} onChange={changeTimezone} name="timezone" type="text" className="input-timezone" placeholder="Введите временную зону" required />
+      <input value={timezoneInput} onChange={changeTimezone} name="timezone" type="text" className="input-timezone" placeholder="Введите временную зону" required />
       <button type="submit" className="submit-button">Добавить</button>
     </form>
       <WorldClockList data={data}  onDelete={deleteClock} />
