@@ -40,7 +40,10 @@ function App() {
 
     const changeTimezone = (e: React.ChangeEvent<HTMLInputElement>) => {
       e.currentTarget.setCustomValidity("");
+      const validate = /^-(12|1[01]|[0-9])(\.5)?$|^(0|[1-9]|1[0-4])(\.5)?$/;
+
       const value = e.currentTarget.value;
+      if (!validate.test(value)) return;
       setTimezone(Number(value));
   };
 
