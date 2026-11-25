@@ -1,0 +1,123 @@
+.input-name {
+  font-size: 16px;
+  margin-bottom: 0;
+}
+
+.input-city,
+.input-timezone,
+.submit-button {
+    height: 40px;
+}
+
+.container-input {
+  display: grid;
+  width: 60%;
+  margin: 10px auto;
+  gap: 20px;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto auto;
+    grid-template-areas:
+    "city-name city-timezone ."
+    "city timezone button";
+}
+
+.input-city {
+  grid-area: city;
+}
+
+.input-timezone {
+  grid-area: timezone;
+}
+
+.city-label {
+  grid-area: city-name;
+}
+
+.timezone-label{
+  grid-area: city-timezone;
+}
+
+.submit-button {
+  grid-area: button;
+  background-color: #fff;
+  border: 1px solid #000;
+}
+
+
+.clock-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.clock-face {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border: 1px solid black;
+    border-radius: 50%;
+}
+
+.hour-hand,
+.minute-hand,
+.second-hand {
+    position: absolute;
+    left: 50%;
+    bottom: 50%;
+    transform-origin: bottom center;
+}
+
+.hour-hand {
+    width: 3px;
+    height: 25px;
+    background: black;
+}
+
+.minute-hand {
+    width: 2px;
+    height: 38px;
+    background: black;
+}
+
+.second-hand {
+    width: 1px;
+    height: 43px;
+    background: red;
+}
+
+.clock-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    width: 60%;
+    margin: 10px auto;
+}
+
+@media (max-width: 900px) {
+    .container-input {
+        width: calc(100% - 40px);
+        margin-left: 20px;
+        margin-right: 20px;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto auto;
+        grid-template-areas:
+            "city-name city-timezone"
+            "city timezone"
+            "button button";
+        gap: 12px;
+    }
+
+    .input-city,
+    .input-timezone,
+    .submit-button {
+        width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+    }
+
+    .clock-list {
+        width: calc(100% - 40px);
+        justify-content: center;
+        gap: 25px;
+    }
+}
